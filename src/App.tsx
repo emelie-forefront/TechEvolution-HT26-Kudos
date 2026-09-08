@@ -5,6 +5,7 @@ import { CurrentColleagueSelect } from './features/send/CurrentColleagueSelect'
 import { SendKudosForm } from './features/send/SendKudosForm'
 import { RecognitionStatus } from './features/status/RecognitionStatus'
 import { useKudos } from './hooks/useKudos'
+import './App.css'
 
 function App() {
   const [currentColleagueId, setCurrentColleagueId] = useState(colleagues[0]?.id ?? '')
@@ -12,7 +13,10 @@ function App() {
   const { kudos, addKudos } = useKudos()
 
   function focusSendForm() {
-    recipientRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    const scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth'
+    recipientRef.current?.scrollIntoView({ behavior: scrollBehavior, block: 'center' })
     recipientRef.current?.focus({ preventScroll: true })
   }
 
