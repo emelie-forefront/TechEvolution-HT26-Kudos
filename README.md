@@ -31,7 +31,7 @@ Select the current colleague under **Sending as**, then choose a recipient,
 category and message. Messages must contain 1–200 characters. Self-kudos are
 allowed.
 
-The feed supports date, recipient-role and category sorting, followed by
+The feed supports newest-first and oldest-first date sorting, followed by
 pagination in groups of ten. The recognition section lists current colleagues
 who have never received kudos or have not received one in the last seven days.
 

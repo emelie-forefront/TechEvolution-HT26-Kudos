@@ -94,12 +94,9 @@ These were open in `.ai/domain-model.md`. Decided now:
 
 ## New requirement — feed sorting
 
-The feed must support **sorting**. At minimum:
+The feed must support **date sorting**:
 
 - **Date** — newest first (default) and oldest first.
-- **Recipient role** — group / sort by the recipient colleague's `role`
-  (resolved via `data/colleagues.json`).
-- **Category** — group / sort by the closed category set.
 
 Notes:
 
@@ -156,7 +153,7 @@ decide, as long as this shape holds.
 - [ ] Kudos persist across refresh via `localStorage`.
 - [ ] Removed colleagues can't be picked; historical kudos still render.
 - [ ] Feed pagination (10 per page).
-- [ ] Feed sorting (date / recipient role / category).
+- [ ] Feed sorting (newest / oldest).
 - [ ] Colleagues without a received kudos in the last seven days are visible.
 - [ ] `.ai/domain-model.md` "Still open" answered and 2–3 Decisions logged.
 - [ ] Everyone in the group can explain every part.
