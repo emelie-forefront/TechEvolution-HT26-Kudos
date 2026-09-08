@@ -1,0 +1,110 @@
+.send-form {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.field label,
+.category-field legend {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field [aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+.field__label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.field__label-row span,
+.field__error {
+  font-size: 14px;
+}
+
+.field__error {
+  margin: 0;
+  color: var(--color-danger);
+}
+
+.category-field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.category-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.category-option {
+  position: relative;
+}
+
+.category-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.category-option span {
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  font-family: var(--font-display);
+}
+
+.category-option input:checked + span {
+  color: var(--color-brand);
+  border: 2px solid var(--color-brand);
+  padding: 7px 11px;
+  font-weight: 600;
+}
+
+.category-option input:focus-visible + span {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.send-form > .button {
+  justify-self: start;
+}
+
+@media (max-width: 480px) {
+  .category-options,
+  .category-option,
+  .category-option span,
+  .send-form > .button {
+    width: 100%;
+  }
+}

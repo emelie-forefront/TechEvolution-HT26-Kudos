@@ -12,6 +12,7 @@ import {
 } from '../../domain/validation'
 import type { AddKudosResult } from '../../hooks/useKudos'
 import { Button } from '../../ui/Button'
+import './send.css'
 
 type SendKudosFormProps = {
   senderId: string
