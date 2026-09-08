@@ -110,6 +110,15 @@ Notes:
 - Sort control lives above the feed and is a single-select (one active
   sort at a time) to keep the mental model simple.
 
+## New requirement — seven days without kudos
+
+The UI must make it possible to see when a colleague has **not received a
+kudos in the last seven days**.
+
+- The status is based on the most recent kudos received by each colleague.
+- A colleague who has never received a kudos also has this status.
+- The seven-day period is calculated from the current date and time.
+
 ## Explicitly out of scope
 
 Straight from `.ai/domain-model.md`:
@@ -148,5 +157,6 @@ decide, as long as this shape holds.
 - [ ] Removed colleagues can't be picked; historical kudos still render.
 - [ ] Feed pagination (10 per page).
 - [ ] Feed sorting (date / recipient role / category).
+- [ ] Colleagues without a received kudos in the last seven days are visible.
 - [ ] `.ai/domain-model.md` "Still open" answered and 2–3 Decisions logged.
 - [ ] Everyone in the group can explain every part.
