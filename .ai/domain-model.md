@@ -42,7 +42,8 @@ From the brief. Build them as specified.
 
 - **Self-kudos are a feature, not a bug.** People under-report their own
   wins. Posting a kudos to yourself is allowed, and it appears like any other. No need to bring this up, the developers are aware of it.
-- **A kudos is immutable once sent.** No editing.
+- **A kudos can be corrected after it is sent.** Recipient, category and
+  message are editable; id, sender and original timestamp stay fixed.
 - **The feed is newest first.** Always.
 - **No limit on how many kudos one person can send.**
 
@@ -62,10 +63,12 @@ From the brief. Build them as specified.
 - Feed sorting is derived before slicing into pages of ten. Seven-day status
   is also derived from the current list because this client-side data set is
   small and a second synchronized cache would add more risk than value.
+- Each feed card owns its inline edit state. Saving validates and replaces the
+  matching kudos in the shared store; cancelling does not mutate it.
 
 ## Deliberately out of scope
 
-Authentication. A backend. A database. Notifications. Editing a sent kudos.
+Authentication. A backend. A database. Notifications. Deleting a sent kudos.
 Comment threads. Rich text. Image uploads. If you're building any of these,
 you've drifted.
 
@@ -77,5 +80,5 @@ Short entries as you build — not documentation, just the call and the reason:
   client-side aggregate and no backend.
 - We chose guarded `localStorage` hydration because refresh persistence matters,
   but malformed browser data must not make the wall unusable.
-- We chose derived sorting, pagination and recognition status because Kudos are
-  immutable and one source of truth is easier to reason about than cached views.
+- We chose derived sorting, pagination and recognition status because one
+  source of truth is easier to reason about than cached views after edits.

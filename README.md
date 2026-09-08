@@ -34,6 +34,8 @@ allowed.
 The feed supports newest-first and oldest-first date sorting, followed by
 pagination in groups of ten. The recognition section lists current colleagues
 who have never received kudos or have not received one in the last seven days.
+Use **Edit** on a kudos to correct its recipient, category or message. Saving
+keeps its original sender and timestamp; cancelling leaves it unchanged.
 
 Kudos are stored only in the browser's `localStorage`. Clear site data for the
 development origin to reset the wall.

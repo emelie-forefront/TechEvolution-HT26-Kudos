@@ -3,8 +3,8 @@
 Consolidated requirements for the Kudos Wall lab, gathered from `README.md`,
 `docs/01-build.md`, `.ai/domain-model.md`, `.ai/architecture.md`,
 `.ai/conventions.md` and `data/README.md`. Includes answers to the "Still
-open" questions from the domain model, plus one new requirement (feed
-sorting).
+open" questions from the domain model, plus later requirements for feed
+sorting, recognition status and editing.
 
 ## The product in one line
 
@@ -54,7 +54,7 @@ A `Kudos` has:
 
 - Self-kudos are a feature. A kudos to yourself is allowed and appears
   like any other.
-- A kudos is **immutable** once sent. No editing, no deleting.
+- A kudos can be edited after it is sent. It cannot be deleted.
 - The feed is **newest first**, always.
 - No limit on how many kudos one person can send.
 
@@ -116,19 +116,34 @@ kudos in the last seven days**.
 - A colleague who has never received a kudos also has this status.
 - The seven-day period is calculated from the current date and time.
 
+## New requirement — edit a kudos
+
+Every kudos in the feed has a visible **Edit** button connected to that
+specific kudos.
+
+- Editing opens an inline form in the kudos panel.
+- The recipient, category and message can be changed.
+- The same recipient, category and message validation used when sending also
+  applies when saving an edit.
+- The kudos `id`, sender and original `createdAt` timestamp do not change.
+- **Save changes** updates the kudos in the store and `localStorage`.
+- **Cancel** closes the form without changing the kudos.
+- A removed colleague is not available as a new recipient while editing.
+
 ## Explicitly out of scope
 
 Straight from `.ai/domain-model.md`:
 
-Authentication. A backend. A database. Notifications. Editing a sent
-kudos. Comment threads. Rich text. Image uploads.
+Authentication. A backend. A database. Notifications. Deleting a sent kudos.
+Comment threads. Rich text. Image uploads.
 
 ## Architecture shape (from `.ai/architecture.md`)
 
 One source of truth for the kudos list:
 
 ```
-[ Send form ] --add(kudos)--> [ kudos store ] --read(kudos[])--> [ Feed ]
+[ Send form ] --add(kudos)----> [ kudos store ] --read(kudos[])--> [ Feed ]
+[ Edit form ] --update(kudos)-> [ kudos store ]
 ```
 
 Folder layout, state library choice and persistence details are ours to
@@ -146,14 +161,16 @@ decide, as long as this shape holds.
 
 - [ ] Runs from a clean clone via the README.
 - [ ] MVP works end to end: send a kudos, see it in the feed.
-- [ ] Product rules implemented as written (self-kudos, immutable,
-      newest-first default, no send limit).
+- [ ] Product rules implemented as written (self-kudos, editable,
+      newest-first default, no send limit or deletion).
 - [ ] Message validation (non-empty, ≤ 200 chars) enforced.
 - [ ] Empty-feed CTA present.
 - [ ] Kudos persist across refresh via `localStorage`.
 - [ ] Removed colleagues can't be picked; historical kudos still render.
 - [ ] Feed pagination (10 per page).
 - [ ] Feed sorting (newest / oldest).
+- [ ] Each kudos can edit recipient, category and message inline.
+- [ ] Saving an edit persists it; cancel leaves the kudos unchanged.
 - [ ] Colleagues without a received kudos in the last seven days are visible.
 - [ ] `.ai/domain-model.md` "Still open" answered and 2–3 Decisions logged.
 - [ ] Everyone in the group can explain every part.

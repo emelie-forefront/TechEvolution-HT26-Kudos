@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react'
-import type { Kudos, KudosDraft } from '../domain/kudos'
+import type { Kudos, KudosDraft, KudosEdit } from '../domain/kudos'
 import {
   isStoredKudos,
   validateKudosDraft,
+  validateKudosEdit,
   type KudosDraftErrors,
 } from '../domain/validation'
 
 export const KUDOS_STORAGE_KEY = 'kudos-wall:kudos'
 
 export type AddKudosResult =
+  | { ok: true; kudos: Kudos }
+  | { ok: false; errors: KudosDraftErrors }
+
+export type UpdateKudosResult =
   | { ok: true; kudos: Kudos }
   | { ok: false; errors: KudosDraftErrors }
 
@@ -57,5 +62,23 @@ export function useKudos() {
     return { ok: true, kudos: createdKudos }
   }
 
-  return { kudos, addKudos }
+  function updateKudos(id: string, edit: KudosEdit): UpdateKudosResult {
+    const validation = validateKudosEdit(edit)
+    if (!validation.ok) {
+      return validation
+    }
+
+    const existingKudos = kudos.find((entry) => entry.id === id)
+    if (!existingKudos) {
+      return { ok: false, errors: { message: 'This kudos is no longer available.' } }
+    }
+
+    const updatedKudos = { ...existingKudos, ...validation.value }
+    setKudos((currentKudos) => currentKudos.map((entry) => (
+      entry.id === id ? updatedKudos : entry
+    )))
+    return { ok: true, kudos: updatedKudos }
+  }
+
+  return { kudos, addKudos, updateKudos }
 }
