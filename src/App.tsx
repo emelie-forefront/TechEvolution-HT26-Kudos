@@ -10,7 +10,7 @@ import './App.css'
 function App() {
   const [currentColleagueId, setCurrentColleagueId] = useState(colleagues[0]?.id ?? '')
   const recipientRef = useRef<HTMLSelectElement>(null)
-  const { kudos, addKudos } = useKudos()
+  const { kudos, addKudos, updateKudos } = useKudos()
 
   function focusSendForm() {
     const scrollBehavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -55,7 +55,11 @@ function App() {
             <h2 id="feed-heading">Recent kudos</h2>
             <span>{kudos.length} total</span>
           </div>
-          <KudosFeed kudos={kudos} onCreateKudos={focusSendForm} />
+          <KudosFeed
+            kudos={kudos}
+            onCreateKudos={focusSendForm}
+            onUpdateKudos={updateKudos}
+          />
         </section>
       </div>
     </main>

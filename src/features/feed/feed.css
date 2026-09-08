@@ -28,6 +28,12 @@
   background: var(--color-surface);
 }
 
+.kudos-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-2);
+}
+
 .kudos-card__people {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -76,6 +82,56 @@
   font-weight: 600;
 }
 
+.edit-kudos {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.edit-kudos__field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.edit-kudos__field label {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.edit-kudos__field select,
+.edit-kudos__field textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+}
+
+.edit-kudos__field textarea {
+  resize: vertical;
+}
+
+.edit-kudos__field [aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+.edit-kudos__label-row,
+.edit-kudos__actions {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.edit-kudos__label-row span {
+  color: #55515a;
+  font-size: 14px;
+}
+
+.edit-kudos__actions {
+  justify-content: flex-start;
+}
+
 .feed-pagination {
   display: flex;
   align-items: center;
@@ -113,5 +169,10 @@
 
   .feed-pagination {
     gap: var(--space-1);
+  }
+
+  .edit-kudos__actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
