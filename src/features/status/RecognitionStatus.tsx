@@ -1,7 +1,7 @@
 import { colleagues } from '../../data/colleagues'
 import type { Kudos } from '../../domain/kudos'
 import { formatDate } from '../../utils/formatDate'
-import { getColleaguesNeedingRecognition } from './recognitionStatus'
+import { getColleaguesNeedingRecognition } from './getRecognitionStatus'
 import './status.css'
 
 type RecognitionStatusProps = {
