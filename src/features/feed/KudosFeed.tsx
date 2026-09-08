@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import type { Kudos } from '../../domain/kudos'
+import { EmptyFeed } from './EmptyFeed'
 import { FeedPagination } from './FeedPagination'
 import { FeedSortControl } from './FeedSortControl'
 import { KudosCard } from './KudosCard'
 import { sortKudos, type FeedSort } from './feedSorting'
+import './feed.css'
 
 type KudosFeedProps = {
   kudos: Kudos[]
@@ -12,7 +14,7 @@ type KudosFeedProps = {
 
 const PAGE_SIZE = 10
 
-export function KudosFeed({ kudos }: KudosFeedProps) {
+export function KudosFeed({ kudos, onCreateKudos }: KudosFeedProps) {
   const [sort, setSort] = useState<FeedSort>('date-newest')
   const [page, setPage] = useState(1)
   const sortedKudos = sortKudos(kudos, sort)
@@ -26,6 +28,10 @@ export function KudosFeed({ kudos }: KudosFeedProps) {
   function handleSortChange(nextSort: FeedSort) {
     setSort(nextSort)
     setPage(1)
+  }
+
+  if (kudos.length === 0) {
+    return <EmptyFeed onCreateKudos={onCreateKudos} />
   }
 
   return (
