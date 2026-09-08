@@ -94,7 +94,11 @@ export function SendKudosForm({
         {recipientError && <p id="recipient-error" className="field__error">{recipientError}</p>}
       </div>
 
-      <fieldset className="category-field" onBlur={() => markTouched('category')}>
+      <fieldset
+        className="category-field"
+        aria-describedby={categoryError ? 'category-error' : undefined}
+        onBlur={() => markTouched('category')}
+      >
         <legend>Category</legend>
         <div className="category-options">
           {KUDOS_CATEGORIES.map((option) => (
@@ -110,7 +114,7 @@ export function SendKudosForm({
             </label>
           ))}
         </div>
-        {categoryError && <p className="field__error">{categoryError}</p>}
+        {categoryError && <p id="category-error" className="field__error">{categoryError}</p>}
       </fieldset>
 
       <div className="field">
