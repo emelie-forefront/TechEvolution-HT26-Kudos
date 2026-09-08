@@ -27,6 +27,8 @@ export type Kudos = {
 
 export type KudosDraft = Pick<Kudos, 'from' | 'to' | 'message' | 'category'>
 
+export type KudosEdit = Pick<Kudos, 'to' | 'message' | 'category'>
+
 export function isKudosCategory(value: unknown): value is KudosCategory {
   return KUDOS_CATEGORIES.includes(value as KudosCategory)
 }
