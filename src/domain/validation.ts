@@ -7,7 +7,11 @@ import {
 
 export const MAX_KUDOS_MESSAGE_LENGTH = 200
 
-export type KudosDraftErrors = Partial<Record<keyof KudosDraft, string>>
+export type KudosDraftInput = Omit<KudosDraft, 'category'> & {
+  category: string
+}
+
+export type KudosDraftErrors = Partial<Record<keyof KudosDraftInput, string>>
 
 export type KudosValidationResult =
   | { ok: true; value: KudosDraft }
@@ -15,7 +19,7 @@ export type KudosValidationResult =
 
 const colleagueIds = new Set(colleagues.map(({ id }) => id))
 
-export function validateKudosDraft(draft: KudosDraft): KudosValidationResult {
+export function validateKudosDraft(draft: KudosDraftInput): KudosValidationResult {
   const errors: KudosDraftErrors = {}
   const message = draft.message.trim()
 
@@ -41,7 +45,10 @@ export function validateKudosDraft(draft: KudosDraft): KudosValidationResult {
     return { ok: false, errors }
   }
 
-  return { ok: true, value: { ...draft, message } }
+  return {
+    ok: true,
+    value: { ...draft, category: draft.category as KudosDraft['category'], message },
+  }
 }
 
 export function isStoredKudos(value: unknown): value is Kudos {
